@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/MercaditoGo/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Mercadito Go - Tu mercado favorito">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Mercadito Go">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Mercadito Go</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      inset: 0;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      background-color: #142952;
+    }
+    #loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-text {
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+
+  <!-- Google Maps JavaScript API (requerido para google_maps_flutter en web).
+       El placeholder lo sustituye el workflow deploy-web con un secret; la key
+       debe estar restringida por HTTP referrer en Google Cloud. -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_WEB_API_KEY__"></script>
+
+  <!-- Cargar Stripe de forma asíncrona sin bloquear -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3/';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    });
+  </script>
+</head>
+
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Cargando Mercadito Go</div>
+  </div>
+
+  <script>
+    // Función para ocultar la pantalla de carga
+    function hideLoading() {
+      const loading = document.getElementById('loading');
+      if (loading) {
+        loading.style.opacity = '0';
+        loading.style.transition = 'opacity 0.4s ease';
+        setTimeout(function() {
+          loading.style.display = 'none';
+        }, 400);
+      }
+    }
+    
+    // Timeout de seguridad para ocultar la pantalla de carga
+    setTimeout(hideLoading, 10000);
+    
+    // Modern Flutter web initialization
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: "2559485181",
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+            
+            // Hide loading screen when Flutter first frame is rendered
+            window.addEventListener('flutter-first-frame', function() {
+              setTimeout(hideLoading, 800);
+            });
+          });
+        }
+      });
+    });
+  </script>
+  
+  <!-- Load Flutter.js for modern initialization -->
+  <script src="flutter.js" defer></script>
+</body>
+</html>

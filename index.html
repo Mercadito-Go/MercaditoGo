@@ -71,6 +71,65 @@
       document.head.appendChild(script);
     });
   </script>
+  <script>
+    // Aviso de pedido nuevo del panel de admin (lib/utils/new_order_alert).
+    // Tres tonos con WebAudio, título parpadeante mientras la pestaña está en
+    // segundo plano y notificación del navegador si se dio permiso.
+    (function () {
+      var ctx = null, blink = null, baseTitle = document.title;
+      function unlock() {
+        try {
+          ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === 'suspended') ctx.resume();
+        } catch (e) {}
+      }
+      // Los navegadores solo permiten sonido tras un clic/tecla del usuario.
+      ['pointerdown', 'keydown'].forEach(function (ev) {
+        window.addEventListener(ev, unlock, { once: false, passive: true });
+      });
+      function beep(at, freq) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, at);
+        g.gain.exponentialRampToValueAtTime(0.4, at + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, at + 0.35);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(at); o.stop(at + 0.4);
+      }
+      window.m2gRequestOrderAlerts = function () {
+        unlock();
+        if ('Notification' in window && Notification.permission === 'default') {
+          Notification.requestPermission();
+        }
+      };
+      window.m2gNewOrderAlert = function (message) {
+        try {
+          unlock();
+          var t = ctx.currentTime;
+          [0, 0.45, 0.9].forEach(function (d, i) { beep(t + d, i === 2 ? 1175 : 880); });
+        } catch (e) {}
+        if (document.hidden) {
+          if (blink) clearInterval(blink);
+          var on = false;
+          blink = setInterval(function () {
+            document.title = (on = !on) ? '🛒 Pedido nuevo' : baseTitle;
+          }, 1000);
+          document.addEventListener('visibilitychange', function stop() {
+            if (!document.hidden) {
+              clearInterval(blink); blink = null; document.title = baseTitle;
+              document.removeEventListener('visibilitychange', stop);
+            }
+          });
+          try {
+            if ('Notification' in window && Notification.permission === 'granted') {
+              var n = new Notification('Mercadito Go', { body: message, icon: 'icons/Icon-192.png', requireInteraction: true });
+              n.onclick = function () { window.focus(); n.close(); };
+            }
+          } catch (e) {}
+        }
+      };
+    })();
+  </script>
 </head>
 
 <body>
@@ -100,7 +159,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "2559485181",
+          serviceWorkerVersion: "3289647869",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+  Página pública para pedir la eliminación de la cuenta sin tener la app
+  instalada (requisito de Google Play). Se publica con la build web en
+  https://mercadito-go.github.io/MercaditoGo/eliminar-cuenta.html
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eliminar tu cuenta · Mercadito Go</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root { --navy: #142952; --ink: #1d2433; --muted: #5b6475; --line: #e3e6ec; --bg: #f6f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    header { background: var(--navy); color: #fff; padding: 20px 16px; }
+    header .in, main { max-width: 680px; margin: 0 auto; }
+    header h1 { margin: 0; font-size: 22px; }
+    main { padding: 24px 16px 48px; }
+    section { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+    h2 { margin: 0 0 8px; font-size: 18px; color: var(--navy); }
+    ol, ul { margin: 6px 0 0; padding-left: 22px; }
+    li { margin: 4px 0; }
+    .muted { color: var(--muted); font-size: 14px; }
+    a { color: var(--navy); font-weight: 600; }
+    .btn { display: inline-block; margin-top: 10px; background: var(--navy); color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <header><div class="in"><h1>Eliminar tu cuenta de Mercadito Go</h1></div></header>
+  <main>
+    <section>
+      <h2>Desde la app o la web (inmediato)</h2>
+      <ol>
+        <li>Inicia sesión en la app o en <a href="./">mercadito-go.github.io/MercaditoGo</a>.</li>
+        <li>Entra a <strong>Perfil</strong>.</li>
+        <li>Toca <strong>Eliminar cuenta</strong> y confirma.</li>
+      </ol>
+      <p class="muted">Si tienes un pedido en camino, primero tiene que entregarse o cancelarse.</p>
+      <a class="btn" href="./">Abrir Mercadito Go</a>
+    </section>
+
+    <section>
+      <h2>Sin la app (por correo)</h2>
+      <p>Escríbenos a <a href="mailto:mercaditogo59@gmail.com?subject=Eliminar%20mi%20cuenta">mercaditogo59@gmail.com</a> desde el correo con el que te registraste, con el asunto <strong>“Eliminar mi cuenta”</strong>. Te confirmaremos por correo cuando se haya eliminado, en un plazo máximo de 20 días hábiles.</p>
+    </section>
+
+    <section>
+      <h2>Qué se elimina</h2>
+      <ul>
+        <li>Tu cuenta y tu perfil (nombre, correo, teléfono).</li>
+        <li>Tus direcciones, carrito, favoritos y listas de Lista Fácil, con sus fotos y dibujos.</li>
+        <li>Las referencias a tarjetas guardadas en Stripe y los dispositivos registrados para notificaciones.</li>
+      </ul>
+      <h2 style="margin-top:14px">Qué se conserva</h2>
+      <ul>
+        <li>Tus pedidos anteriores, <strong>sin tus datos personales</strong> (sin nombre, teléfono, dirección ni notas): solo productos, montos y fechas, como registro contable y fiscal.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

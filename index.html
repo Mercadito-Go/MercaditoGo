@@ -159,7 +159,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "4066244936",
+          serviceWorkerVersion: "529918988",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -174,7 +174,33 @@
       });
     });
   </script>
-  
+
+  <script>
+    // Chrome en Android: mientras un campo de texto está activo, Flutter web no
+    // actualiza el alto de la app, solo el inset del teclado. Si el teclado se
+    // cierra en ese momento (p. ej. al iniciar sesión y cambiar de pantalla), la
+    // app se queda con el alto que tenía con el teclado abierto y el resto de la
+    // pantalla muestra el fondo de la página (la barra inferior se ve enorme).
+    // Volver a medir un poco después de que termina la edición lo corrige.
+    (function () {
+      var vv = window.visualViewport;
+      if (!vv) return;
+      var timers = [];
+      function remeasure() {
+        timers.forEach(clearTimeout);
+        timers = [300, 1000].map(function (ms) {
+          return setTimeout(function () { vv.dispatchEvent(new Event('resize')); }, ms);
+        });
+      }
+      // Si el teclado se cierra con el campo aún activo, la app quita el foco
+      // (StaleKeyboardFix en lib/core/web) y este focusout dispara la medición.
+      document.addEventListener('focusout', remeasure, true);
+      vv.addEventListener('resize', function (e) { if (e.isTrusted) remeasure(); });
+      window.addEventListener('pageshow', remeasure);
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) remeasure(); });
+    })();
+  </script>
+
   <!-- Load Flutter.js for modern initialization -->
   <script src="flutter.js" defer></script>
 </body>

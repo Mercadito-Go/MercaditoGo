@@ -1,11 +1,11 @@
 {
-    "name": "Mercaditogo",
-    "short_name": "Mercaditogo",
+    "name": "Mercadito Go",
+    "short_name": "Mercadito Go",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#142952",
     "theme_color": "#142952",
-    "description": "A new Flutter project.",
+    "description": "Productos frescos del mercado con entrega a domicilio en Culiacán.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

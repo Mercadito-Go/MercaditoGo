@@ -159,7 +159,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "1235323559",
+          serviceWorkerVersion: "2071708971",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -198,6 +198,77 @@
       vv.addEventListener('resize', function (e) { if (e.isTrusted) remeasure(); });
       window.addEventListener('pageshow', remeasure);
       document.addEventListener('visibilitychange', function () { if (!document.hidden) remeasure(); });
+    })();
+  </script>
+
+  <script>
+    // Aviso de versión nueva. La app se guarda en el teléfono (service
+    // worker) y la versión publicada solo se veía en la segunda apertura; en
+    // iPhone, además, había que cerrarla por completo. Cada pocos minutos y
+    // al volver a la app se compara la versión de esta página con la
+    // publicada; si cambió, se ofrece actualizar con un toque.
+    (function () {
+      var current = "2071708971";
+      if (!current || !('fetch' in window)) return;
+      var shown = false;
+
+      function check() {
+        if (shown || document.hidden || navigator.onLine === false) return;
+        fetch('index.html?v=' + Date.now(), { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.text() : ''; })
+          .then(function (html) {
+            var m = /serviceWorkerVersion:\s*"?(\d+)"?/.exec(html);
+            if (m && m[1] !== String(current)) showBanner();
+          })
+          .catch(function () {});
+      }
+
+      function update() {
+        var btn = document.getElementById('mg-update-btn');
+        if (btn) { btn.disabled = true; btn.textContent = 'Actualizando…'; }
+        // Borrar la copia guardada para que la recarga baje todo nuevo.
+        var jobs = [];
+        if ('serviceWorker' in navigator) {
+          jobs.push(navigator.serviceWorker.getRegistrations().then(function (regs) {
+            return Promise.all(regs.map(function (r) { return r.unregister(); }));
+          }));
+        }
+        if ('caches' in window) {
+          jobs.push(caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          }));
+        }
+        Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+      }
+
+      function showBanner() {
+        shown = true;
+        var bar = document.createElement('div');
+        bar.setAttribute('role', 'status');
+        bar.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);' +
+          'top:calc(env(safe-area-inset-top, 0px) + 12px);z-index:100000;' +
+          'width:calc(100% - 24px);max-width:480px;box-sizing:border-box;' +
+          'display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;' +
+          'background:#142952;color:#fff;border-radius:14px;' +
+          'box-shadow:0 6px 24px rgba(0,0,0,.25);font:500 14px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;';
+        bar.innerHTML =
+          '<span style="flex:1">Hay una versión nueva de Mercadito Go</span>' +
+          '<button id="mg-update-btn" style="flex:none;border:0;border-radius:999px;padding:9px 16px;' +
+          'background:#fff;color:#142952;font:600 14px system-ui,-apple-system,sans-serif;cursor:pointer">Actualizar</button>' +
+          '<button aria-label="Cerrar" id="mg-update-close" style="flex:none;border:0;background:transparent;' +
+          'color:#fff;font-size:20px;line-height:1;padding:4px 6px;cursor:pointer">×</button>';
+        document.body.appendChild(bar);
+        document.getElementById('mg-update-btn').addEventListener('click', update);
+        document.getElementById('mg-update-close').addEventListener('click', function () {
+          bar.remove();
+          // Se vuelve a ofrecer más tarde.
+          setTimeout(function () { shown = false; }, 30 * 60 * 1000);
+        });
+      }
+
+      setTimeout(check, 20000);
+      setInterval(check, 5 * 60 * 1000);
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
     })();
   </script>
 

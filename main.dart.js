@@ -188520,11 +188520,11 @@ return A.iA(!0,A.my(B.aT,A.a([A.dn(!1,s,s,s,!0,s,s,!0,s,B.UX,s,s,new A.bJJ(r,a),
 $S:209}
 A.bJJ.prototype={
 $0(){A.am(this.b,!1).d8(null)
-this.a.HI("6679054907")},
+this.a.HI("6674321478")},
 $S:0}
 A.bJK.prototype={
 $0(){A.am(this.b,!1).d8(null)
-this.a.H9("6679054907")},
+this.a.H9("6674321478")},
 $S:0}
 A.bJL.prototype={
 $0(){A.am(this.a,!1).d8(null)
@@ -189945,7 +189945,7 @@ b6O(){var s="montserrat",r=null
 return A.a1(A.a([B.aKL,B.a8,A.r("La funcionalidad de dibujo s\xf3lo est\xe1 disponible en la aplicaci\xf3n m\xf3vil.",r,r,r,r,A.PP(r,s,16,r),B.aP,r,r),B.a8,A.r("Por favor, utiliza otra opci\xf3n o descarga la aplicaci\xf3n para Android o iOS.",r,r,r,r,A.PP(B.bw,s,14,r),B.aP,r,r)],t.p),B.z,r,B.bp,B.r,0,B.t)},
 Pp(){var s=0,r=A.o(t.H),q,p=2,o=[],n=this,m,l,k,j,i,h
 var $async$Pp=A.k(function(a,b){if(a===1){o.push(b)
-s=p}while(true)switch(s){case 0:i=A.dz("https://wa.me/5216679054907?text=Hola, quiero hacer un pedido con la siguiente lista:",0,null)
+s=p}while(true)switch(s){case 0:i=A.dz("https://wa.me/5216674321478?text=Hola, quiero hacer un pedido con la siguiente lista:",0,null)
 p=4
 s=7
 return A.h(A.wo(i),$async$Pp)
@@ -190154,7 +190154,7 @@ $S:0}
 A.bMC.prototype={
 $0(){var s=0,r=A.o(t.H),q
 var $async$$0=A.k(function(a,b){if(a===1)return A.l(b,r)
-while(true)switch(s){case 0:q=A.nK(null,null,"+5216679054907",null,null,"tel")
+while(true)switch(s){case 0:q=A.nK(null,null,"+5216674321478",null,null,"tel")
 s=4
 return A.h(A.wo(q),$async$$0)
 case 4:s=b?2:3
@@ -194958,7 +194958,7 @@ $S:32}
 A.c23.prototype={
 $0(){var s=0,r=A.o(t.H),q,p=this,o,n
 var $async$$0=A.k(function(a,b){if(a===1)return A.l(b,r)
-while(true)switch(s){case 0:n=A.dz("https://wa.me/526679054907",0,null)
+while(true)switch(s){case 0:n=A.dz("https://wa.me/526674321478",0,null)
 s=5
 return A.h(A.wo(n),$async$$0)
 case 5:s=b?3:4
@@ -195010,7 +195010,7 @@ $S:2}
 A.c25.prototype={
 $0(){var s=0,r=A.o(t.H),q,p=2,o=[],n=this,m,l,k,j,i,h
 var $async$$0=A.k(function(a,b){if(a===1){o.push(b)
-s=p}while(true)switch(s){case 0:i=A.dz("tel:+526679054907",0,null)
+s=p}while(true)switch(s){case 0:i=A.dz("tel:+526674321478",0,null)
 p=4
 s=7
 return A.h(A.wo(i),$async$$0)
@@ -195586,7 +195586,7 @@ i.toString
 i=A.aL(i,B.al,t.x)
 i.toString
 m=i
-l=A.dz("https://wa.me/5216679054907",0,null)
+l=A.dz("https://wa.me/5216674321478",0,null)
 p=4
 s=10
 return A.h(A.wo(l),$async$Ok)
@@ -199876,7 +199876,7 @@ if(m.i(n,a)!=null&&J.D(m.i(n,a)).length!==0)J.bP(p,A.f4("Notas: "+A.d(m.i(n,a)),
 J.bP(q,A.wY(e,A.rT(p,B.kA),B.aiE,e,e,e,B.aG0,e))}J.bP(q,new A.kM(e,20,e))
 J.bP(q,A.wY(e,e,e,B.QO,2,e,e,1/0))
 J.bP(q,new A.kM(e,8,e))
-J.bP(q,new A.afc(B.v5,e,e,A.rT(A.a([A.f4("\xa1Gracias por tu compra!",e,A.jl(e,e,e,e,e,e,e,e,e,B.da,e,e,e,e,B.cW,e,!0,e,e,e,e),e),new A.kM(e,2,e),A.f4("Pedidos: pedidos@mercadito-go.com | Soporte: soporte@mercadito-go.com",e,B.aqp,B.apG),A.f4("www.mercadito-go.com | Tel\xe9fono: +52 6679054907",e,B.aqp,B.apG)],l),B.vZ)))
+J.bP(q,new A.afc(B.v5,e,e,A.rT(A.a([A.f4("\xa1Gracias por tu compra!",e,A.jl(e,e,e,e,e,e,e,e,e,B.da,e,e,e,e,B.cW,e,!0,e,e,e,e),e),new A.kM(e,2,e),A.f4("Pedidos: pedidos@mercadito-go.com | Soporte: soporte@mercadito-go.com",e,B.aqp,B.apG),A.f4("www.mercadito-go.com | Tel\xe9fono: +52 6674321478",e,B.aqp,B.apG)],l),B.vZ)))
 J.bP(q,new A.kM(e,5,e))
 return new A.Qm(A.a([new A.P9(new A.apg(0.2,o)),A.rT(q,B.kA)],l))},
 $S:1120}

@@ -45057,7 +45057,7 @@ r=n==="admin"
 if(r)try{A.cy(a,!1,t.Vu).Gn(B.h6)}catch(q){s=A.z(q)
 $.B.$1("\u26a0\ufe0f Error activando modo admin: "+A.d(s))}o.a=null
 if(n==="repartidor"||n==="driver"){o.a=new A.uI(b,null)
-p="/driver-home"}else if(r||n==="m2gadmin"){o.a=B.Gb
+p="/driver-home"}else if(r||n==="colaborador"){o.a=B.Gb
 p="/admin-dashboard"}else{o.a=new A.qz(b,null)
 p="/home"}A.am(a,!0).yL(A.c8(new A.ccS(o),new A.kH(p,null),t.z),new A.ccT())},
 ac9(a){return A.d_i(a)},
@@ -173720,13 +173720,13 @@ s.toString
 s=A.cy(s,!1,t.nj).b
 r=s==null?n:s.ax.toLowerCase()
 s=r!=="admin"
-if(!s||r==="m2gadmin")$.clZ().lU()
+if(!s||r==="colaborador")$.clZ().lU()
 q=$.b2().b
 q===$&&A.b()
 q=q.gcg().c
 q=q==null?n:q.r
 p=q==null?n:q.a
-if((!s||r==="m2gadmin")&&p!=null)o.as.Sf().bd(0,new A.bzy(o,p),t.P)},
+if((!s||r==="colaborador")&&p!=null)o.as.Sf().bd(0,new A.bzy(o,p),t.P)},
 Os(){var s=0,r=A.o(t.H),q,p=2,o=[],n=this,m,l,k,j
 var $async$Os=A.k(function(a,b){if(a===1){o.push(b)
 s=p}while(true)switch(s){case 0:if(n.c==null){s=1
@@ -184457,7 +184457,7 @@ $S:168}
 A.bCE.prototype={
 $3(a,b,c){var s=b.b
 if(s==null)return B.cn1
-switch(s.ax){case"admin":case"m2gadmin":return B.Gb
+switch(s.ax){case"admin":case"colaborador":return B.Gb
 case"driver":case"repartidor":return new A.uI(s,null)
 case"cliente":default:return new A.qz(s,null)}},
 $C:"$3",
@@ -184593,7 +184593,7 @@ return A.n($async$D9,r)},
 ad9(a){if(B.i.m(a,"admin"))this.a=B.h6
 else if(B.i.m(a,"repartidor"))this.a=B.qC
 else this.a=B.va},
-ad8(a){if(a.toLowerCase()==="admin"||a.toLowerCase()==="m2gadmin")this.a=B.h6
+ad8(a){if(a.toLowerCase()==="admin"||a.toLowerCase()==="colaborador")this.a=B.h6
 else if(a.toLowerCase()==="repartidor"||a.toLowerCase()==="driver")this.a=B.qC
 else this.a=B.va},
 Gn(a){return this.aW8(a)},
@@ -185739,7 +185739,7 @@ Gp(a){var s,r,q,p,o,n
 this.b=a
 q=a.ax
 p=q.toLowerCase()
-if(p==="admin"||p==="m2gadmin")try{o=$.KZ()
+if(p==="admin"||p==="colaborador")try{o=$.KZ()
 o=$.aD.dy$.x.i(0,o)
 o.toString
 s=A.cy(o,!1,t.Vu)
@@ -201194,7 +201194,7 @@ $R:3,
 $S:1132}
 A.adr.prototype={
 L(a){var s,r=null,q=A.cPm(a,new A.aQP(),t.nj,t.B),p=A.aH(a,r,t.l).w,o=p.a,n=o.a
-if(n<=640||q==="admin"||q==="m2gadmin")return this.c
+if(n<=640||q==="admin"||q==="colaborador")return this.c
 s=Math.min(n,640)
 o=p.J1(new A.R(s,o.b))
 return new A.qn(B.azQ,A.c9(A.bi(A.xM(A.Ah(this.c,B.B,r),o),r,s),r,r),r)}}

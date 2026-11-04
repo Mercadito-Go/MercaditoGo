@@ -183621,7 +183621,7 @@ gaLT(){return"Information"},
 gal8(){return"WhatsApp"},
 gaRo(){return"Contact our support"},
 ga1Y(){return"Email"},
-gapc(){return"mercaditogo.cln@gmail.com"},
+gapc(){return"soporte@mercadito-go.com"},
 gqo(a){return"Version"},
 gajA(){return"Privacy Policy"},
 gakg(){return"Terms and Conditions"},
@@ -183842,7 +183842,7 @@ gaLT(){return"Informaci\xf3n"},
 gal8(){return"WhatsApp"},
 gaRo(){return"Contacta con nuestro soporte"},
 ga1Y(){return"Correo electr\xf3nico"},
-gapc(){return"mercaditogo.cln@gmail.com"},
+gapc(){return"soporte@mercadito-go.com"},
 gqo(a){return"Versi\xf3n"},
 gajA(){return"Pol\xedtica de privacidad"},
 gakg(){return"T\xe9rminos y condiciones"},
@@ -194974,7 +194974,7 @@ $S:2}
 A.c24.prototype={
 $0(){var s=0,r=A.o(t.H),q,p=2,o=[],n=this,m,l,k,j,i,h
 var $async$$0=A.k(function(a,b){if(a===1){o.push(b)
-s=p}while(true)switch(s){case 0:i=A.dz("mailto:mercaditogo59@gmail.com",0,null)
+s=p}while(true)switch(s){case 0:i=A.dz("mailto:contacto@mercadito-go.com",0,null)
 p=4
 s=7
 return A.h(A.wo(i),$async$$0)
@@ -195622,7 +195622,7 @@ i.toString
 i=A.aL(i,B.al,t.x)
 i.toString
 m=i
-l=A.nK(null,null,"mercaditogo.cln@gmail.com","subject=Soporte Mercadito Go&body=Hola, necesito ayuda con...",null,"mailto")
+l=A.nK(null,null,"soporte@mercadito-go.com","subject=Soporte Mercadito Go&body=Hola, necesito ayuda con...",null,"mailto")
 p=4
 s=10
 return A.h(A.wo(l),$async$Oj)
@@ -199876,7 +199876,7 @@ if(m.i(n,a)!=null&&J.D(m.i(n,a)).length!==0)J.bP(p,A.f4("Notas: "+A.d(m.i(n,a)),
 J.bP(q,A.wY(e,A.rT(p,B.kA),B.aiE,e,e,e,B.aG0,e))}J.bP(q,new A.kM(e,20,e))
 J.bP(q,A.wY(e,e,e,B.QO,2,e,e,1/0))
 J.bP(q,new A.kM(e,8,e))
-J.bP(q,new A.afc(B.v5,e,e,A.rT(A.a([A.f4("\xa1Gracias por tu compra!",e,A.jl(e,e,e,e,e,e,e,e,e,B.da,e,e,e,e,B.cW,e,!0,e,e,e,e),e),new A.kM(e,2,e),A.f4("Soporte: mercaditogo59@gmail.com | Corporativo: mercaditogo.cln@gmail.com",e,B.aqp,B.apG),A.f4("www.mercaditogo.com | Tel\xe9fono: +52 6679054907",e,B.aqp,B.apG)],l),B.vZ)))
+J.bP(q,new A.afc(B.v5,e,e,A.rT(A.a([A.f4("\xa1Gracias por tu compra!",e,A.jl(e,e,e,e,e,e,e,e,e,B.da,e,e,e,e,B.cW,e,!0,e,e,e,e),e),new A.kM(e,2,e),A.f4("Pedidos: pedidos@mercadito-go.com | Soporte: soporte@mercadito-go.com",e,B.aqp,B.apG),A.f4("www.mercadito-go.com | Tel\xe9fono: +52 6679054907",e,B.aqp,B.apG)],l),B.vZ)))
 J.bP(q,new A.kM(e,5,e))
 return new A.Qm(A.a([new A.P9(new A.apg(0.2,o)),A.rT(q,B.kA)],l))},
 $S:1120}

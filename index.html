@@ -159,7 +159,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "3335332932",
+          serviceWorkerVersion: "150795265",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -208,36 +208,56 @@
     // al volver a la app se compara la versión de esta página con la
     // publicada; si cambió, se ofrece actualizar con un toque.
     (function () {
-      var current = "3335332932";
+      var current = "150795265";
       if (!current || !('fetch' in window)) return;
       var shown = false;
 
-      function check() {
+      function check(auto) {
         if (shown || document.hidden || navigator.onLine === false) return;
         fetch('index.html?v=' + Date.now(), { cache: 'no-store' })
           .then(function (r) { return r.ok ? r.text() : ''; })
           .then(function (html) {
             var m = /serviceWorkerVersion:\s*"?(\d+)"?/.exec(html);
-            if (m && m[1] !== String(current)) showBanner();
+            if (m && m[1] !== String(current)) {
+              // Tras mucho tiempo sin abrir la app no hay nada en curso que
+              // perder: se actualiza sola en vez de pedir un toque.
+              if (auto === true) { shown = true; update(); } else showBanner();
+            }
           })
           .catch(function () {});
       }
 
+      function withTimeout(p, ms) {
+        return Promise.race([p, new Promise(function (resolve) { setTimeout(resolve, ms); })]);
+      }
+
+      var updating = false;
       function update() {
+        if (updating) return;
+        updating = true;
         var btn = document.getElementById('mg-update-btn');
         if (btn) { btn.disabled = true; btn.textContent = 'Actualizando…'; }
-        // Borrar la copia guardada para que la recarga baje todo nuevo.
+        // Pase lo que pase se recarga a los 20 s: antes, si el navegador no
+        // respondía al borrar la copia guardada, el botón se quedaba sin hacer nada.
+        setTimeout(function () { location.reload(); }, 20000);
         var jobs = [];
+        // Borrar la copia guardada (service worker y caché) para bajar todo nuevo.
         if ('serviceWorker' in navigator) {
-          jobs.push(navigator.serviceWorker.getRegistrations().then(function (regs) {
+          jobs.push(withTimeout(navigator.serviceWorker.getRegistrations().then(function (regs) {
             return Promise.all(regs.map(function (r) { return r.unregister(); }));
-          }));
+          }), 4000));
         }
         if ('caches' in window) {
-          jobs.push(caches.keys().then(function (keys) {
+          jobs.push(withTimeout(caches.keys().then(function (keys) {
             return Promise.all(keys.map(function (k) { return caches.delete(k); }));
-          }));
+          }), 4000));
         }
+        // GitHub Pages deja los archivos 10 min en la caché del navegador, y una
+        // recarga normal podía volver a abrir la versión vieja. Se piden de nuevo
+        // saltando esa caché para que la recarga ya encuentre la versión nueva.
+        ['index.html', 'flutter_bootstrap.js', 'flutter.js', 'main.dart.js', 'manifest.json'].forEach(function (f) {
+          jobs.push(withTimeout(fetch(f, { cache: 'reload' }).catch(function () {}), 15000));
+        });
         Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
       }
 
@@ -258,7 +278,9 @@
           '<button aria-label="Cerrar" id="mg-update-close" style="flex:none;border:0;background:transparent;' +
           'color:#fff;font-size:20px;line-height:1;padding:4px 6px;cursor:pointer">×</button>';
         document.body.appendChild(bar);
-        document.getElementById('mg-update-btn').addEventListener('click', update);
+        var ub = document.getElementById('mg-update-btn');
+        ub.addEventListener('click', update);
+        ub.addEventListener('touchend', function (e) { e.preventDefault(); update(); }, { passive: false });
         document.getElementById('mg-update-close').addEventListener('click', function () {
           bar.remove();
           // Se vuelve a ofrecer más tarde.
@@ -266,9 +288,16 @@
         });
       }
 
+      var hiddenAt = 0;
+      var LONG_IDLE = 2 * 60 * 60 * 1000;
       setTimeout(check, 20000);
       setInterval(check, 5 * 60 * 1000);
-      document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { hiddenAt = Date.now(); return; }
+        var idle = hiddenAt ? Date.now() - hiddenAt : 0;
+        hiddenAt = 0;
+        check(idle > LONG_IDLE);
+      });
     })();
   </script>
 

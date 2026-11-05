@@ -6,10 +6,10 @@ importScripts('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js
 importScripts('https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js');
 
 var cfg = {
-  apiKey: '__FIREBASE_WEB_API_KEY__',
-  appId: '__FIREBASE_WEB_APP_ID__',
-  messagingSenderId: '__FIREBASE_MESSAGING_SENDER_ID__',
-  projectId: '__FIREBASE_PROJECT_ID__'
+  apiKey: 'AIzaSyD0BR3N6xRfi4eWLgqMNRC-CjxHPiYnl0k',
+  appId: '1:991668274219:web:256aa5f112dcfb27c2d66e',
+  messagingSenderId: '991668274219',
+  projectId: 'mercaditogo-b0287'
 };
 
 if (cfg.apiKey.indexOf('__') !== 0) {

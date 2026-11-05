@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+  Página a la que Stripe regresa tras un pago. Vive en el mismo dominio que la
+  app (https://app.mercadito-go.com/payment-success.html) y no necesita sesión:
+  el pedido ya lo creó el servidor al confirmar el pago. La app, al volver a
+  primer plano, verifica el pago y muestra el seguimiento del pedido.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142952">
+  <meta name="robots" content="noindex">
+  <title>Pago recibido · Mercadito Go</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root { --navy: #142952; --gold: #C4924B; --ink: #1d2433; --muted: #5b6475; --bg: #f6f7f9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+           background: var(--bg); color: var(--ink);
+           font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; }
+    .card { background: #fff; border-radius: 16px; box-shadow: 0 6px 24px rgba(20,41,82,.12);
+            max-width: 420px; width: 100%; padding: 32px 24px; text-align: center; }
+    .logo { width: 72px; height: 72px; border-radius: 16px; }
+    .check { width: 64px; height: 64px; margin: 16px auto 8px; border-radius: 50%; background: #e6f4ea;
+             color: #2b8a3e; font-size: 36px; line-height: 64px; font-weight: 700; }
+    h1 { margin: 8px 0 8px; font-size: 24px; color: var(--navy); }
+    p { margin: 8px 0; color: var(--muted); }
+    .steps { text-align: left; background: #f1f3f7; border-radius: 12px; padding: 12px 16px; margin: 18px 0; font-size: 15px; }
+    .steps b { color: var(--navy); }
+    .btn { display: block; margin-top: 12px; padding: 14px 20px; border-radius: 12px; font-weight: 700;
+           text-decoration: none; font-size: 16px; background: var(--navy); color: #fff; }
+    .btn.secondary { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="logo" src="icons/Icon-192.png" alt="Mercadito Go">
+    <div class="check" aria-hidden="true">✓</div>
+    <h1>¡Pago recibido!</h1>
+    <p>Tu pedido ya está confirmado y lo estamos preparando.</p>
+    <div class="steps">
+      <b>¿Qué sigue?</b><br>
+      Cierra esta pestaña y regresa a <b>Mercadito Go</b>. Ahí verás el seguimiento de tu pedido.
+    </div>
+    <a class="btn" href="https://app.mercadito-go.com/">Abrir Mercadito Go</a>
+    <a class="btn secondary" href="javascript:window.close()" id="close">Cerrar esta pestaña</a>
+  </main>
+  <script>
+    // Cerrar solo funciona si la pestaña la abrió la propia app (web de escritorio);
+    // en el celular el navegador lo ignora y queda el botón "Abrir Mercadito Go".
+    document.getElementById('close').addEventListener('click', function (e) {
+      e.preventDefault();
+      try { window.close(); } catch (_) {}
+    });
+  </script>
+</body>
+</html>

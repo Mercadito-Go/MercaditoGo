@@ -159,7 +159,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "341968069",
+          serviceWorkerVersion: "720256985",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -208,7 +208,7 @@
     // al volver a la app se compara la versión de esta página con la
     // publicada; si cambió, se ofrece actualizar con un toque.
     (function () {
-      var current = "341968069";
+      var current = "720256985";
       if (!current || !('fetch' in window)) return;
       var shown = false;
 
@@ -269,6 +269,91 @@
       setTimeout(check, 20000);
       setInterval(check, 5 * 60 * 1000);
       document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+    })();
+  </script>
+
+  <script>
+    // Invitación a instalar la app en la pantalla de inicio (solo en el celular
+    // y solo si todavía no está instalada). Android/Chrome ofrece el botón
+    // "Instalar"; iPhone/Safari no tiene botón, así que se explican los pasos.
+    // "Ahora no" la oculta 14 días.
+    (function () {
+      var KEY = 'mg_install_dismissed_at';
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var isAndroid = /Android/i.test(ua);
+      if (!isIOS && !isAndroid) return;
+
+      var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+        window.navigator.standalone === true;
+      if (standalone) return;
+
+      try {
+        var d = parseInt(localStorage.getItem(KEY) || '0', 10);
+        if (d && Date.now() - d < 14 * 24 * 3600 * 1000) return;
+      } catch (e) {}
+
+      var deferred = null;
+      var shown = false;
+
+      function dismiss(bar) {
+        try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+        if (bar) bar.remove();
+      }
+
+      function show(html, onInstall) {
+        if (shown) return;
+        shown = true;
+        var bar = document.createElement('div');
+        bar.setAttribute('role', 'dialog');
+        bar.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);' +
+          'bottom:calc(env(safe-area-inset-bottom, 0px) + 92px);z-index:99999;' +
+          'width:calc(100% - 24px);max-width:480px;box-sizing:border-box;' +
+          'padding:14px 14px 12px 16px;background:#fff;color:#1d2433;border-radius:16px;' +
+          'box-shadow:0 8px 28px rgba(20,41,82,.30);border:1px solid #e3e6ec;' +
+          'font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;';
+        bar.innerHTML =
+          '<div style="display:flex;gap:12px;align-items:center">' +
+          '<img src="icons/Icon-192.png" alt="" width="44" height="44" style="border-radius:10px;flex:none">' +
+          '<div style="flex:1"><b style="color:#142952;font-size:15px">Instala Mercadito Go</b><br>' + html + '</div></div>' +
+          '<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">' +
+          '<button id="mg-inst-no" style="border:0;background:transparent;color:#5b6475;font:600 14px system-ui,sans-serif;padding:8px 10px;cursor:pointer">Ahora no</button>' +
+          (onInstall ? '<button id="mg-inst-yes" style="border:0;border-radius:999px;background:#142952;color:#fff;font:600 14px system-ui,sans-serif;padding:9px 18px;cursor:pointer">Instalar</button>' : '') +
+          '</div>';
+        document.body.appendChild(bar);
+        document.getElementById('mg-inst-no').addEventListener('click', function () { dismiss(bar); });
+        if (onInstall) {
+          document.getElementById('mg-inst-yes').addEventListener('click', function () { onInstall(bar); });
+        }
+      }
+
+      if (isAndroid) {
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferred = e;
+          // Un poco después de abrir, para no tapar la pantalla de carga.
+          setTimeout(function () {
+            show('Ábrela directo desde tu pantalla de inicio, más rápida y a pantalla completa.', function (bar) {
+              if (!deferred) return;
+              deferred.prompt();
+              deferred.userChoice.then(function () { deferred = null; bar.remove(); });
+            });
+          }, 6000);
+        });
+        window.addEventListener('appinstalled', function () {
+          var b = document.querySelector('[role=dialog]'); if (b) b.remove();
+        });
+      } else if (isIOS) {
+        // Solo Safari puede añadir a la pantalla de inicio (no Chrome ni Firefox en iPhone).
+        var isSafari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|GSA/.test(ua);
+        setTimeout(function () {
+          if (isSafari) {
+            show('Toca <b>Compartir</b> <span aria-hidden="true">⬆️</span> y luego <b>«Añadir a pantalla de inicio»</b>.', null);
+          } else {
+            show('Ábrela en <b>Safari</b> para instalarla: toca <b>Compartir</b> y luego <b>«Añadir a pantalla de inicio»</b>.', null);
+          }
+        }, 6000);
+      }
     })();
   </script>
 

@@ -163,8 +163,9 @@
       act.appendChild(el('button', { class: 'big', text: '🛵 Ya salí con el pedido', onclick: onSalir }));
     } else {
       act.appendChild(el('h2', { text: 'Paso 2 · Al entregar' }));
-      act.appendChild(el('label', { text: 'Código que te da el cliente' }));
+      act.appendChild(el('label', { text: 'Código de entrega del cliente' }));
       act.appendChild(el('input', { id: 'codigo', class: 'code', type: 'text', maxlength: '8', autocomplete: 'off', autocapitalize: 'characters', placeholder: '______' }));
+      act.appendChild(el('p', { class: 'muted', text: 'Pídeselo al cliente al entregar: es el código que él ve en su app, en el seguimiento de su pedido. No es el código de repartidor.' }));
       if (p.cobrar_efectivo > 0) {
         act.appendChild(el('label', { text: 'Efectivo que cobraste' }));
         act.appendChild(el('input', { id: 'cobrado', type: 'number', inputmode: 'decimal', step: '0.01', value: String(p.cobrar_efectivo) }));
@@ -218,7 +219,7 @@
       lock(false);
       if (r.ok) { stopLocation(); localStorage.removeItem('mg_loc_' + token); return load(); }
       var e = r.data && r.data.error;
-      if (e === 'codigo_incorrecto') say('Código incorrecto. Te quedan ' + (r.data.intentos_restantes) + ' intentos.', false);
+      if (e === 'codigo_incorrecto') say('Ese no es el código de entrega del cliente. Pídeselo: lo ve en su app, en el seguimiento del pedido. Te quedan ' + (r.data.intentos_restantes) + ' intentos.', false);
       else if (e === 'demasiados_intentos') say('Se bloqueó el código. Pide un enlace nuevo a Mercadito Go.', false);
       else if (e === 'enlace_no_disponible') load();
       else say('No se pudo registrar. Revisa tu internet e intenta de nuevo.', false);

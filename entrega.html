@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+  Página de entrega para repartidores sin app (https://app.mercadito-go.com/entrega.html?t=TOKEN).
+  El equipo de Mercadito Go la manda por WhatsApp, un enlace por pedido. No pide
+  sesión: el enlace es la identidad (caduca y se puede revocar). Habla con la
+  función `entrega-enlace` de Supabase.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#142952">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Entrega · Mercadito Go</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root { --navy:#142952; --gold:#C4924B; --ink:#1d2433; --muted:#5b6475; --line:#e3e6ec; --bg:#f6f7f9; --ok:#2b8a3e; --bad:#c92a2a; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding-bottom:env(safe-area-inset-bottom); }
+    header { background:var(--navy); color:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px; }
+    header img { width:40px; height:40px; border-radius:10px; }
+    header h1 { margin:0; font-size:18px; }
+    header p { margin:0; font-size:13px; opacity:.8; }
+    main { max-width:560px; margin:0 auto; padding:14px 14px 40px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:12px; }
+    .card h2 { margin:0 0 8px; font-size:15px; color:var(--navy); text-transform:uppercase; letter-spacing:.4px; }
+    .chip { display:inline-block; padding:3px 10px; border-radius:999px; font-size:13px; font-weight:700; background:#e9ecef; color:#495057; }
+    .chip.go { background:#fff3d9; color:#8a5a00; } .chip.done { background:#e6f4ea; color:var(--ok); }
+    .big { display:block; width:100%; border:0; border-radius:12px; padding:15px; font-size:17px; font-weight:800; color:#fff; background:var(--navy); text-align:center; text-decoration:none; cursor:pointer; margin-top:10px; }
+    .big.green { background:var(--ok); } .big.gold { background:var(--gold); } .big.ghost { background:#fff; color:var(--navy); border:2px solid var(--navy); }
+    .big:disabled { opacity:.55; cursor:default; }
+    .row { display:flex; gap:10px; } .row > * { flex:1; }
+    .addr { font-size:18px; font-weight:700; margin:2px 0 6px; }
+    .muted { color:var(--muted); font-size:14px; }
+    .cash { background:#fff3d9; border:1px solid #f1d28b; border-radius:12px; padding:10px 12px; font-weight:700; margin-top:8px; }
+    ul { margin:6px 0 0; padding-left:20px; } li { margin:3px 0; }
+    label { display:block; font-weight:700; margin:12px 0 4px; }
+    input[type=text], input[type=number], textarea, select { width:100%; padding:13px; font-size:18px; border:2px solid var(--line); border-radius:10px; font-family:inherit; }
+    input.code { text-transform:uppercase; letter-spacing:4px; text-align:center; font-weight:800; font-size:24px; }
+    .msg { margin-top:10px; padding:10px 12px; border-radius:10px; font-weight:600; }
+    .msg.err { background:#fdecec; color:var(--bad); } .msg.ok { background:#e6f4ea; color:var(--ok); }
+    .center { text-align:center; padding:48px 20px; } .center .ico { font-size:54px; }
+    .toggle { display:flex; align-items:center; gap:10px; margin-top:10px; font-weight:600; }
+    .toggle input { width:22px; height:22px; }
+    .hidden { display:none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icons/Icon-192.png" alt="">
+    <div><h1>Mercadito Go</h1><p id="who">Entrega de pedido</p></div>
+  </header>
+  <main id="app"><div class="center"><div class="ico">⏳</div><p>Cargando tu pedido…</p></div></main>
+
+<script>
+(function () {
+  var API = 'https://nodtjyrecvkazgxprqry.supabase.co/functions/v1/entrega-enlace';
+  var token = new URLSearchParams(location.search).get('t') || '';
+  var app = document.getElementById('app');
+  var state = null;           // última respuesta de "info"
+  var watchId = null;
+  var lastSent = 0;
+  var busy = false;
+  var lastSig = '';
+
+  // ── utilidades ──
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === 'text') n.textContent = attrs[k];
+      else if (k === 'class') n.className = attrs[k];
+      else if (k.indexOf('on') === 0) n.addEventListener(k.slice(2), attrs[k]);
+      else n.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) n.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function money(v) { return '$' + Number(v || 0).toFixed(2); }
+  function hora(iso) { try { return new Date(iso).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+
+  function call(action, extra) {
+    var body = Object.assign({ token: token, action: action }, extra || {});
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, status: r.status, data: d }; }); })
+      .catch(function () { return { ok: false, status: 0, data: { error: 'sin_conexion' } }; });
+  }
+
+  function showOnly(node) { app.textContent = ''; app.appendChild(node); }
+  function aviso(icon, titulo, texto) {
+    showOnly(el('div', { class: 'center' }, [el('div', { class: 'ico', text: icon }), el('h2', { text: titulo }), el('p', { class: 'muted', text: texto })]));
+  }
+
+  // ── carga ──
+  function load(silent) {
+    if (!/^[a-f0-9]{48}$/.test(token)) return aviso('🔗', 'Enlace no válido', 'Pide un enlace nuevo a Mercadito Go.');
+    return call('info').then(function (r) {
+      if (r.status === 404) { stopLocation(); return aviso('🔗', 'Enlace no válido', 'Pide un enlace nuevo a Mercadito Go.'); }
+      if (!r.ok && r.status !== 409) { if (!silent) aviso('📡', 'Sin conexión', 'Revisa tu internet y vuelve a abrir el enlace.'); return; }
+      // En los refrescos automáticos no se vuelve a dibujar si nada cambió:
+      // así no se borra el código que el repartidor está escribiendo.
+      var d = r.data;
+      var sig = [d.enlace, d.pedido && d.pedido.estado, d.salio_en, d.entregado_en].join('|');
+      if (silent && state && sig === lastSig) return;
+      lastSig = sig;
+      state = d;
+      render();
+    });
+  }
+
+  function render() {
+    var s = state, p = s.pedido;
+    document.getElementById('who').textContent = 'Hola ' + s.repartidor + ' · Pedido #' + p.id_corto;
+    if (s.enlace === 'revocado') { stopLocation(); return aviso('🚫', 'Enlace cancelado', 'Mercadito Go te mandará uno nuevo si hace falta.'); }
+    if (s.enlace === 'expirado') { stopLocation(); return aviso('⌛', 'Este enlace ya venció', 'Pide un enlace nuevo a Mercadito Go.'); }
+    if (s.enlace === 'cerrado') {
+      stopLocation();
+      return p.estado === 'entregado'
+        ? aviso('✅', 'Pedido entregado', 'Gracias. Ya quedó registrado.')
+        : aviso('🚫', 'Pedido cancelado', 'Este pedido ya no se entrega.');
+    }
+
+    var salio = !!s.salio_en;
+    var wrap = el('div');
+
+    // Estado
+    wrap.appendChild(el('div', { class: 'card' }, [
+      el('span', { class: 'chip ' + (salio ? 'go' : ''), text: salio ? 'En camino desde las ' + hora(s.salio_en) : 'Listo para salir' })
+    ]));
+
+    // Entrega
+    var dest = p.coordenadas ? p.coordenadas.lat + ',' + p.coordenadas.lon : encodeURIComponent(p.direccion || '');
+    var card = el('div', { class: 'card' }, [
+      el('h2', { text: 'Entregar a' }),
+      el('div', { class: 'addr', text: p.direccion || 'Dirección no disponible' }),
+      el('div', { class: 'muted', text: 'Cliente: ' + p.cliente })
+    ]);
+    var acciones = el('div', { class: 'row' }, [
+      el('a', { class: 'big gold', href: 'https://www.google.com/maps/dir/?api=1&destination=' + dest, target: '_blank', rel: 'noopener', text: '🗺️ Abrir en Maps' }),
+      p.telefono ? el('a', { class: 'big ghost', href: 'tel:' + String(p.telefono).replace(/[^0-9+]/g, ''), text: '📞 Llamar' }) : null
+    ]);
+    card.appendChild(acciones);
+    if (p.notas) card.appendChild(el('p', { class: 'muted', text: 'Notas: ' + p.notas }));
+    if (p.cobrar_efectivo > 0) {
+      var cambio = p.paga_con ? Math.max(0, p.paga_con - p.cobrar_efectivo) : 0;
+      card.appendChild(el('div', { class: 'cash', text: '💵 Cobrar en efectivo: ' + money(p.cobrar_efectivo) +
+        (p.paga_con ? ' · Paga con ' + money(p.paga_con) + (cambio > 0.009 ? ' · Cambio: ' + money(cambio) : '') : '') }));
+    } else {
+      card.appendChild(el('div', { class: 'muted', text: 'Ya está pagado: no cobres nada al cliente.' }));
+    }
+    wrap.appendChild(card);
+
+    // Productos
+    var lista = el('ul');
+    (p.productos || []).forEach(function (it) { lista.appendChild(el('li', { text: it.cantidad + ' × ' + it.nombre })); });
+    wrap.appendChild(el('div', { class: 'card' }, [el('h2', { text: 'Lleva' }), lista]));
+
+    // Acciones
+    var act = el('div', { class: 'card' });
+    var msg = el('div', { class: 'msg hidden', id: 'msg' });
+    if (!salio) {
+      act.appendChild(el('h2', { text: 'Paso 1' }));
+      act.appendChild(el('button', { class: 'big', text: '🛵 Ya salí con el pedido', onclick: onSalir }));
+    } else {
+      act.appendChild(el('h2', { text: 'Paso 2 · Al entregar' }));
+      act.appendChild(el('label', { text: 'Código que te da el cliente' }));
+      act.appendChild(el('input', { id: 'codigo', class: 'code', type: 'text', maxlength: '8', autocomplete: 'off', autocapitalize: 'characters', placeholder: '______' }));
+      if (p.cobrar_efectivo > 0) {
+        act.appendChild(el('label', { text: 'Efectivo que cobraste' }));
+        act.appendChild(el('input', { id: 'cobrado', type: 'number', inputmode: 'decimal', step: '0.01', value: String(p.cobrar_efectivo) }));
+      }
+      act.appendChild(el('button', { class: 'big green', text: '✅ Marcar entregado', onclick: onEntregar }));
+      var t = el('label', { class: 'toggle' }, [el('input', { type: 'checkbox', id: 'loc', onchange: onToggleLocation }), 'Compartir mi ubicación con el cliente']);
+      act.appendChild(t);
+      act.appendChild(el('p', { class: 'muted', text: 'Para que se vea tu ubicación, deja esta pantalla abierta.' }));
+    }
+    act.appendChild(msg);
+    wrap.appendChild(act);
+
+    // Problema
+    var prob = el('div', { class: 'card' }, [
+      el('button', { class: 'big ghost', text: '⚠️ Tengo un problema', onclick: function () { document.getElementById('prob').classList.toggle('hidden'); } }),
+      el('div', { id: 'prob', class: 'hidden' }, [
+        el('label', { text: '¿Qué pasó?' }),
+        el('select', { id: 'motivo' }, [
+          el('option', { text: 'El cliente no contesta' }), el('option', { text: 'No encuentro la dirección' }),
+          el('option', { text: 'El cliente no está' }), el('option', { text: 'Falta o está dañado un producto' }), el('option', { text: 'Otro' })
+        ]),
+        el('textarea', { id: 'detalle', rows: '2', placeholder: 'Detalle (opcional)' }),
+        el('button', { class: 'big', text: 'Avisar a Mercadito Go', onclick: onProblema })
+      ])
+    ]);
+    wrap.appendChild(prob);
+
+    showOnly(wrap);
+    if (salio && watchId === null && localStorage.getItem('mg_loc_' + token) === '1') { document.getElementById('loc').checked = true; startLocation(); }
+  }
+
+  function say(text, ok) {
+    var m = document.getElementById('msg'); if (!m) return;
+    m.className = 'msg ' + (ok ? 'ok' : 'err'); m.textContent = text;
+  }
+  function lock(on) { busy = on; Array.prototype.forEach.call(document.querySelectorAll('button'), function (b) { b.disabled = on; }); }
+
+  // ── acciones ──
+  function onSalir() {
+    if (busy) return; lock(true);
+    call('salir').then(function (r) { lock(false); if (r.ok) load(); else say('No se pudo registrar. Revisa tu internet e intenta de nuevo.', false); });
+  }
+
+  function onEntregar() {
+    if (busy) return;
+    var codigo = (document.getElementById('codigo').value || '').trim();
+    if (codigo.length < 4) return say('Escribe el código que te da el cliente.', false);
+    var cobradoEl = document.getElementById('cobrado');
+    lock(true);
+    call('entregar', { codigo: codigo, efectivo_cobrado: cobradoEl ? Number(cobradoEl.value) : undefined }).then(function (r) {
+      lock(false);
+      if (r.ok) { stopLocation(); localStorage.removeItem('mg_loc_' + token); return load(); }
+      var e = r.data && r.data.error;
+      if (e === 'codigo_incorrecto') say('Código incorrecto. Te quedan ' + (r.data.intentos_restantes) + ' intentos.', false);
+      else if (e === 'demasiados_intentos') say('Se bloqueó el código. Pide un enlace nuevo a Mercadito Go.', false);
+      else if (e === 'enlace_no_disponible') load();
+      else say('No se pudo registrar. Revisa tu internet e intenta de nuevo.', false);
+    });
+  }
+
+  function onProblema() {
+    if (busy) return;
+    var motivo = document.getElementById('motivo').value;
+    var detalle = (document.getElementById('detalle').value || '').trim();
+    lock(true);
+    call('problema', { motivo: detalle ? motivo + ': ' + detalle : motivo }).then(function (r) {
+      lock(false);
+      say(r.ok ? 'Listo. Ya le avisamos a Mercadito Go; te contactarán.' : 'No se pudo enviar. Intenta de nuevo o escribe por WhatsApp.', r.ok);
+    });
+  }
+
+  // ── ubicación (mientras la pantalla está abierta) ──
+  function startLocation() {
+    if (!navigator.geolocation || watchId !== null) return;
+    watchId = navigator.geolocation.watchPosition(function (pos) {
+      var now = Date.now(); if (now - lastSent < 10000) return; lastSent = now;
+      call('ubicacion', { lat: pos.coords.latitude, lon: pos.coords.longitude });
+    }, function () { stopLocation(); var c = document.getElementById('loc'); if (c) c.checked = false; say('No se pudo obtener tu ubicación. Revisa el permiso del navegador.', false); },
+    { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 });
+  }
+  function stopLocation() { if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId); watchId = null; }
+  function onToggleLocation(e) {
+    if (e.target.checked) { localStorage.setItem('mg_loc_' + token, '1'); startLocation(); }
+    else { localStorage.removeItem('mg_loc_' + token); stopLocation(); }
+  }
+
+  load();
+  // Se refresca solo por si el equipo cancela o cambia algo.
+  setInterval(function () { if (!document.hidden && !busy) load(true); }, 45000);
+})();
+</script>
+</body>
+</html>

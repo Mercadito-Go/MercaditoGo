@@ -133,6 +133,16 @@
 </head>
 
 <body>
+  <script>
+    // Quita el parámetro con el que el aviso de versión nueva recarga la página.
+    try {
+      var u = new URL(location.href);
+      if (u.searchParams.has('mgv')) {
+        u.searchParams.delete('mgv');
+        history.replaceState(null, '', u.pathname + u.search + u.hash);
+      }
+    } catch (e) {}
+  </script>
   <div id="loading">
     <div class="spinner"></div>
     <div class="loading-text">Cargando Mercadito Go</div>
@@ -159,7 +169,7 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerVersion: "3028605209",
+          serviceWorkerVersion: "2497485990",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
@@ -208,7 +218,7 @@
     // al volver a la app se compara la versión de esta página con la
     // publicada; si cambió, se ofrece actualizar con un toque.
     (function () {
-      var current = "3028605209";
+      var current = "2497485990";
       if (!current || !('fetch' in window)) return;
       var shown = false;
 
@@ -239,7 +249,7 @@
         if (btn) { btn.disabled = true; btn.textContent = 'Actualizando…'; }
         // Pase lo que pase se recarga a los 20 s: antes, si el navegador no
         // respondía al borrar la copia guardada, el botón se quedaba sin hacer nada.
-        setTimeout(function () { location.reload(); }, 20000);
+        setTimeout(freshReload, 20000);
         var jobs = [];
         // Borrar la copia guardada (service worker y caché) para bajar todo nuevo.
         if ('serviceWorker' in navigator) {
@@ -258,7 +268,18 @@
         ['index.html', 'flutter_bootstrap.js', 'flutter.js', 'main.dart.js', 'manifest.json'].forEach(function (f) {
           jobs.push(withTimeout(fetch(f, { cache: 'reload' }).catch(function () {}), 15000));
         });
-        Promise.all(jobs).catch(function () {}).then(function () { location.reload(); });
+        Promise.all(jobs).catch(function () {}).then(freshReload);
+      }
+
+      // Recarga pidiendo la página con una dirección distinta cada vez: así ni la
+      // caché del navegador ni la de GitHub Pages (10 min) pueden devolver la
+      // versión vieja, que era lo que hacía que el aviso volviera a salir.
+      function freshReload() {
+        try {
+          location.replace(location.pathname + '?mgv=' + Date.now() + location.hash);
+        } catch (e) {
+          location.reload();
+        }
       }
 
       function showBanner() {

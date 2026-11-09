@@ -204388,7 +204388,7 @@ A.ceE.prototype={
 $0(){return A.ie(A.cY(u.H,0,null),B.dP)},
 $S:0}
 A.ceF.prototype={
-$0(){return A.ie(A.cY("https://app.mercadito-go.com/terminos.html#devoluciones",0,null),B.dP)},
+$0(){return A.ie(A.cY("https://app.mercadito-go.com/devoluciones.html",0,null),B.dP)},
 $S:0}
 A.ceG.prototype={
 $0(){return A.ie(A.cY(u.d,0,null),B.dP)},

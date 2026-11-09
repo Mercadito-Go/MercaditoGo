@@ -2,14 +2,15 @@
 <!--
   Aviso de privacidad integral (LFPDPPP). Se publica con la build web en
   https://app.mercadito-go.com/aviso-privacidad.html
-  Basado en los datos que la app recoge de verdad; debe revisarlo alguien que
-  conozca la LFPDPPP.
+  Basado en los datos que la app recoge de verdad. Si cambia lo que se recaba o
+  los proveedores que se usan, actualizar este aviso y la fecha.
 -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aviso de privacidad · Mercadito Go</title>
+  <meta name="description" content="Aviso de privacidad de Mercadito Go: qué datos recabamos, para qué, con quién los compartimos y cómo ejercer tus derechos ARCO.">
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root { --navy: #142952; --ink: #1d2433; --muted: #5b6475; --line: #e3e6ec; --bg: #f6f7f9; }
@@ -21,6 +22,7 @@
     header p { margin: 4px 0 0; opacity: .8; font-size: 14px; }
     main { padding: 24px 16px 48px; }
     section { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    section.resumen { background: #eef3fb; border-color: #cfdaf0; }
     h2 { margin: 0 0 8px; font-size: 18px; color: var(--navy); }
     ul { margin: 6px 0 0; padding-left: 22px; }
     li { margin: 4px 0; }
@@ -30,93 +32,123 @@
     .scroll { overflow-x: auto; }
     a { color: var(--navy); font-weight: 600; }
     .muted { color: var(--muted); font-size: 14px; }
+    nav.toc { font-size: 14px; margin-bottom: 14px; }
+    nav.toc a { font-weight: 500; margin-right: 8px; white-space: nowrap; }
   </style>
 </head>
 <body>
   <header><div class="in">
     <h1>Aviso de privacidad integral</h1>
-    <p>Última actualización: 1 de noviembre de 2026</p>
+    <p>Última actualización: 8 de noviembre de 2026</p>
   </div></header>
   <main>
-    <section>
+    <section class="resumen">
+      <h2>Resumen (aviso simplificado)</h2>
+      <ul>
+        <li><strong>Quién:</strong> Mercadito Go es responsable de tus datos personales.</li>
+        <li><strong>Qué usamos:</strong> tus datos de contacto, tus direcciones y tus pedidos, para darte el servicio de compra y entrega.</li>
+        <li><strong>Pagos con tarjeta:</strong> los procesa un procesador de pagos externo; nosotros no vemos ni guardamos el número de tu tarjeta.</li>
+        <li><strong>No vendemos tus datos</strong> ni los usamos para publicidad de terceros.</li>
+        <li><strong>Tus derechos:</strong> puedes acceder, rectificar, cancelar u oponerte (ARCO), y eliminar tu cuenta desde <strong>Perfil</strong> o por correo a <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>.</li>
+      </ul>
+      <p class="muted">Lo anterior es un resumen. El aviso completo está abajo.</p>
+    </section>
+
+    <nav class="toc" aria-label="Contenido">
+      <a href="#responsable">Responsable</a><a href="#datos">Datos</a><a href="#finalidades">Finalidades</a><a href="#terceros">Terceros</a><a href="#arco">Derechos ARCO</a><a href="#conservacion">Conservación</a><a href="#seguridad">Seguridad</a><a href="#cookies">Cookies</a><a href="#cambios">Cambios</a>
+    </nav>
+
+    <section id="responsable">
       <h2>1. Quién es el responsable de tus datos</h2>
-      <p><strong>MercaditoGo S.A. de C.V.</strong> (“Mercadito Go”), con domicilio en Calle Epitacio Osuna 560, colonia Jorge Almada, C.P. 80200, Culiacán Rosales, Sinaloa, México, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).</p>
+      <p><strong>Mercadito Go</strong>, con domicilio en Calle Epitacio Osuna 560, colonia Jorge Almada, C.P. 80200, Culiacán Rosales, Sinaloa, México, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y su normativa aplicable.</p>
       <p>Contacto para cualquier asunto de privacidad: <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>.</p>
     </section>
 
-    <section>
+    <section id="datos">
       <h2>2. Qué datos recabamos</h2>
       <div class="scroll"><table>
         <tr><th>Dato</th><th>Para qué</th></tr>
-        <tr><td>Nombre, correo electrónico y teléfono</td><td>Crear y administrar tu cuenta, contactarte sobre tus pedidos.</td></tr>
+        <tr><td>Nombre, correo electrónico y teléfono</td><td>Crear y administrar tu cuenta, contactarte sobre tus pedidos y darte soporte.</td></tr>
+        <tr><td>Inicio de sesión con Google o con correo y contraseña</td><td>Identificarte de forma segura. Si entras con Google recibimos tu nombre y correo; tu contraseña de Google nunca llega a nosotros.</td></tr>
         <tr><td>Direcciones de entrega y su ubicación en el mapa</td><td>Calcular el costo de envío y entregar tus pedidos.</td></tr>
-        <tr><td>Pedidos: productos, montos, forma de pago, notas e historial</td><td>Procesar, preparar, entregar y dar seguimiento a tus compras; aclaraciones y facturación.</td></tr>
-        <tr><td>Fotos, dibujos y textos de “Lista Fácil”</td><td>Armar tu pedido a partir de tu lista.</td></tr>
-        <tr><td>Datos de pago con tarjeta</td><td>Los captura y procesa directamente <strong>Stripe</strong>. Mercadito Go <strong>no recibe ni guarda</strong> el número de tu tarjeta.</td></tr>
-        <tr><td>Ubicación del repartidor (solo cuentas de repartidor)</td><td>Mostrar al cliente dónde va su pedido mientras se entrega.</td></tr>
-        <tr><td>Datos técnicos de la app: identificador para notificaciones, modelo y sistema del dispositivo, y reportes de fallas</td><td>Enviarte avisos sobre tus pedidos y detectar y corregir errores de la app.</td></tr>
+        <tr><td>Pedidos: productos, montos, forma de pago, notas e historial</td><td>Procesar, preparar, entregar y dar seguimiento a tus compras; aclaraciones, devoluciones y facturación.</td></tr>
+        <tr><td>Fotos, dibujos y textos de “Lista Fácil”, y los productos que pides o sugieres</td><td>Armar tu pedido a partir de tu lista y ampliar el catálogo.</td></tr>
+        <tr><td>Datos de pago con tarjeta</td><td>Los captura y procesa directamente nuestro <strong>procesador de pagos</strong> externo. Mercadito Go <strong>no recibe ni guarda</strong> el número de tu tarjeta.</td></tr>
+        <tr><td>Pago por transferencia bancaria</td><td>Confirmar que recibimos tu pago. Pagas desde tu banco; no recabamos tus claves ni datos de acceso bancarios. Podemos pedirte la referencia o el comprobante de la operación.</td></tr>
+        <tr><td>Ubicación del repartidor (solo cuando entrega tu pedido)</td><td>Mostrarte dónde va tu pedido mientras se entrega. No recabamos la ubicación de los clientes en segundo plano.</td></tr>
+        <tr><td>Datos técnicos: identificador para notificaciones, modelo y sistema del dispositivo, navegador, idioma y reportes de fallas</td><td>Enviarte avisos sobre tus pedidos, mantener la seguridad y detectar y corregir errores de la app.</td></tr>
+        <tr><td>Mensajes que nos envías por WhatsApp o correo</td><td>Atender tus dudas, aclaraciones y solicitudes.</td></tr>
       </table></div>
-      <p class="muted">No recabamos datos personales sensibles. El servicio está dirigido a personas mayores de 18 años.</p>
+      <p class="muted">No recabamos datos personales sensibles ni datos financieros de tu tarjeta. El servicio está dirigido a personas mayores de 18 años; si detectamos una cuenta de un menor, la eliminaremos.</p>
     </section>
 
-    <section>
+    <section id="finalidades">
       <h2>3. Finalidades</h2>
-      <p>Las finalidades del cuadro anterior son <strong>necesarias</strong> para darte el servicio. No usamos tus datos para publicidad de terceros ni los vendemos.</p>
-      <p>Si en el futuro queremos enviarte promociones, te pediremos tu consentimiento por separado y podrás negarte sin que eso afecte el servicio.</p>
+      <p><strong>Necesarias</strong> (sin ellas no podemos darte el servicio): crear y administrar tu cuenta; procesar, cobrar, preparar y entregar tus pedidos; contactarte por tu pedido; atender devoluciones, reembolsos, aclaraciones y soporte; cumplir obligaciones legales, contables y fiscales; prevenir fraude y mantener la seguridad del servicio.</p>
+      <p><strong>Adicionales</strong> (puedes negarte sin que eso afecte el servicio): mejorar la app mediante estadísticas internas y reportes de fallas, y, si en el futuro queremos enviarte promociones o novedades, solo lo haremos con tu consentimiento por separado. Si no quieres que usemos tus datos para estas finalidades adicionales, escríbenos a <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>.</p>
+      <p>No vendemos tus datos ni los usamos para publicidad de terceros.</p>
     </section>
 
-    <section>
+    <section id="terceros">
       <h2>4. Con quién compartimos tus datos</h2>
-      <p>Solo con proveedores que nos ayudan a operar el servicio y que tratan los datos por nuestra cuenta (encargados), bajo obligaciones de confidencialidad:</p>
+      <p>Solo con proveedores de servicios que nos ayudan a operar y que tratan los datos por nuestra cuenta (encargados), bajo obligaciones de confidencialidad y seguridad. Por categoría, son proveedores de:</p>
       <ul>
-        <li><strong>Supabase</strong>: base de datos, cuentas y almacenamiento de archivos.</li>
-        <li><strong>Stripe</strong>: cobro con tarjeta.</li>
-        <li><strong>Google</strong> (Maps y Places): búsqueda de direcciones y mapas.</li>
-        <li><strong>Firebase</strong> (Google): notificaciones y reportes de fallas de la app (Crashlytics).</li>
-        <li><strong>Gmail</strong> (Google): envío de correos de la cuenta, como confirmación y recuperación de contraseña.</li>
+        <li>alojamiento de la información, cuentas de usuario y almacenamiento de archivos;</li>
+        <li>procesamiento de pagos con tarjeta;</li>
+        <li>mapas y búsqueda de direcciones, e inicio de sesión con Google si eliges esa opción;</li>
+        <li>notificaciones y monitoreo de errores técnicos de la app;</li>
+        <li>envío de correos de la cuenta, como la confirmación de tu correo y la recuperación de contraseña;</li>
+        <li>mensajería (por ejemplo, WhatsApp) para comunicarnos contigo y enviar el enlace de entrega a repartidores externos;</li>
+        <li>alojamiento de nuestro sitio web informativo.</li>
       </ul>
-      <p>El personal de Mercadito Go y los repartidores ven tu nombre, teléfono, dirección y pedido solo para prepararlo y entregarlo. No transferimos tus datos a terceros para fines propios de ellos, salvo cuando lo exija una autoridad competente.</p>
+      <p>Estos proveedores pueden almacenar o procesar datos fuera de México, principalmente en Estados Unidos y la Unión Europea. Exigimos que los protejan con medidas equivalentes a las de este aviso. Si quieres conocer qué proveedor concreto trata un dato en particular, pregúntanos en <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>.</p>
+      <p><strong>Personal que ve tus datos.</strong> El personal de Mercadito Go y los repartidores ven tu nombre, teléfono, dirección y pedido solo para prepararlo y entregarlo. Los repartidores externos reciben por WhatsApp un enlace temporal (caduca a las 24 horas) con los datos necesarios para entregar ese pedido. Quienes compran en el mercado solo ven los productos y cantidades por proveedor, sin tus datos de contacto ni tu dirección.</p>
+      <p>No transferimos tus datos a terceros para fines propios de ellos, salvo cuando lo exija una autoridad competente.</p>
     </section>
 
-    <section>
-      <h2>5. Tus derechos ARCO y cómo revocar tu consentimiento</h2>
-      <p>Puedes <strong>acceder</strong> a tus datos, <strong>rectificarlos</strong>, <strong>cancelarlos</strong> u <strong>oponerte</strong> a su uso, así como revocar tu consentimiento:</p>
+    <section id="arco">
+      <h2>5. Tus derechos ARCO, revocación y limitación de uso</h2>
+      <p>Puedes <strong>acceder</strong> a tus datos, <strong>rectificarlos</strong>, <strong>cancelarlos</strong> u <strong>oponerte</strong> a su tratamiento, revocar tu consentimiento y pedir que limitemos el uso o la divulgación de tus datos:</p>
       <ul>
         <li>Desde la app: en <strong>Perfil</strong> puedes corregir tus datos y <strong>eliminar tu cuenta</strong>.</li>
-        <li>Por correo a <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>, desde el correo con el que te registraste, indicando tu nombre, qué derecho quieres ejercer y, si aplica, qué dato corregir.</li>
+        <li>Por correo a <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a>, desde el correo con el que te registraste, indicando tu nombre, qué derecho quieres ejercer, una descripción clara de los datos y, si aplica, qué dato corregir. Podemos pedirte que confirmes tu identidad para protegerte.</li>
       </ul>
-      <p>Te responderemos en un máximo de <strong>20 días hábiles</strong> y, si procede, lo haremos efectivo dentro de los 15 días hábiles siguientes. Más detalles sobre la eliminación: <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>.</p>
+      <p>Te responderemos en un máximo de <strong>20 días hábiles</strong> y, si procede, lo haremos efectivo dentro de los 15 días hábiles siguientes. El ejercicio de estos derechos es gratuito, salvo costos de envío o reproducción cuando aplique. Más detalles sobre la eliminación: <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>.</p>
     </section>
 
-    <section>
+    <section id="conservacion">
       <h2>6. Cuánto tiempo conservamos tus datos</h2>
       <ul>
         <li>Los datos de tu cuenta, mientras la tengas activa.</li>
         <li>Al eliminar tu cuenta borramos tu perfil, direcciones, listas y fotos. Tus pedidos anteriores se conservan <strong>sin tus datos personales</strong> (solo productos, montos y fechas) para cumplir obligaciones contables y fiscales.</li>
+        <li>Los reportes técnicos de fallas se conservan solo el tiempo necesario para corregir los errores.</li>
+        <li>La información que debamos guardar por ley se conserva por el plazo que la ley exija.</li>
       </ul>
     </section>
 
-    <section>
+    <section id="seguridad">
       <h2>7. Cómo protegemos tus datos</h2>
       <ul>
         <li>Toda la comunicación viaja cifrada (HTTPS).</li>
         <li>Cada usuario solo puede ver sus propios datos; el acceso del personal está limitado por rol y las cuentas de administración usan verificación en dos pasos.</li>
         <li>Las fotos de Lista Fácil se guardan en un almacenamiento privado y solo se ven con enlaces temporales.</li>
+        <li>Revisamos los accesos y las cuentas del personal, y podemos suspender una cuenta ante uso indebido.</li>
       </ul>
+      <p>Si detectamos una vulneración de seguridad que afecte de forma significativa tus derechos, te lo informaremos sin dilación para que puedas tomar medidas.</p>
     </section>
 
-    <section>
+    <section id="cookies">
       <h2>8. Cookies y almacenamiento en tu navegador</h2>
-      <p>La versión web guarda en tu navegador solo lo necesario para mantener tu sesión y tus preferencias (por ejemplo, tu carrito). No usamos cookies de publicidad ni de rastreo.</p>
+      <p>La versión web guarda en tu navegador solo lo necesario para mantener tu sesión y tus preferencias (por ejemplo, tu carrito) y para que la app cargue rápido sin conexión. No usamos cookies de publicidad ni de rastreo. Al pagar con tarjeta, nuestro procesador de pagos puede usar sus propias cookies para prevenir fraude; al ver mapas, el proveedor del mapa puede hacerlo también. Puedes borrar estos datos desde la configuración de tu navegador.</p>
     </section>
 
-    <section>
+    <section id="cambios">
       <h2>9. Cambios a este aviso</h2>
       <p>Si cambiamos este aviso, publicaremos la nueva versión en esta misma página con su fecha de actualización y, si el cambio es importante, te avisaremos en la app.</p>
-      <p class="muted">Si consideras que tu derecho a la protección de datos fue vulnerado, puedes acudir al Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI) o a la autoridad que lo sustituya.</p>
+      <p class="muted">Si consideras que tu derecho a la protección de datos fue vulnerado, puedes acudir a la autoridad competente en materia de protección de datos personales (a partir de 2025, la Secretaría Anticorrupción y Buen Gobierno, que asumió las funciones del extinto INAI).</p>
     </section>
 
-    <p class="muted"><a href="terminos.html">Términos y condiciones</a> · <a href="./">Volver a Mercadito Go</a></p>
+    <p class="muted"><a href="terminos.html">Términos y condiciones</a> · <a href="devoluciones.html">Devoluciones y reembolsos</a> · <a href="./">Volver a Mercadito Go</a></p>
   </main>
 </body>
 </html>

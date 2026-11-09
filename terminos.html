@@ -2,14 +2,16 @@
 <!--
   Términos y condiciones. Se publica con la build web en
   https://app.mercadito-go.com/terminos.html
-  Lo debe revisar un abogado. Las políticas de faltantes, cancelación y
-  reembolso describen cómo opera hoy la app; ajústalas si el negocio decide otra cosa.
+  Las reglas de entrega, pago, faltantes, cancelación y reembolso describen cómo
+  opera hoy la app y se detallan en devoluciones.html; si el negocio decide otra
+  cosa, actualizar ambos documentos y la fecha.
 -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Términos y condiciones · Mercadito Go</title>
+  <meta name="description" content="Términos y condiciones de uso de Mercadito Go: cuenta, precios, formas de pago, entregas, productos frescos y responsabilidades.">
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root { --navy: #142952; --ink: #1d2433; --muted: #5b6475; --line: #e3e6ec; --bg: #f6f7f9; }
@@ -21,6 +23,7 @@
     header p { margin: 4px 0 0; opacity: .8; font-size: 14px; }
     main { padding: 24px 16px 48px; }
     section { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 14px; }
+    section:target { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(20,41,82,.15); }
     h2 { margin: 0 0 8px; font-size: 18px; color: var(--navy); }
     ul { margin: 6px 0 0; padding-left: 22px; }
     li { margin: 4px 0; }
@@ -31,92 +34,141 @@
 <body>
   <header><div class="in">
     <h1>Términos y condiciones</h1>
-    <p>Última actualización: 1 de noviembre de 2026</p>
+    <p>Última actualización: 8 de noviembre de 2026</p>
   </div></header>
   <main>
-    <section>
+    <section id="aceptacion">
       <h2>1. Quiénes somos y qué aceptas</h2>
-      <p>MercaditoGo S.A. de C.V. (“Mercadito Go”), con domicilio en Calle Epitacio Osuna 560, colonia Jorge Almada, C.P. 80200, Culiacán Rosales, Sinaloa, ofrece, a través de su app y su sitio web, la venta de productos de mercado con entrega a domicilio o para recoger en sus centros de producción en Culiacán, Sinaloa. Al crear una cuenta o hacer un pedido aceptas estos términos y nuestro <a href="aviso-privacidad.html">aviso de privacidad</a>.</p>
+      <p>Mercadito Go (“Mercadito Go”, “nosotros”), con domicilio en Calle Epitacio Osuna 560, colonia Jorge Almada, C.P. 80200, Culiacán Rosales, Sinaloa, México, ofrece a través de su app y su sitio web la venta de productos de mercados locales con entrega a domicilio o para recoger en sus centros de producción en Culiacán, Sinaloa.</p>
+      <p>Al crear una cuenta, hacer un pedido o usar la app aceptas estos términos, nuestro <a href="aviso-privacidad.html">aviso de privacidad</a> y nuestra <a href="devoluciones.html">política de devoluciones y reembolsos</a>. Si no estás de acuerdo, no uses el servicio.</p>
     </section>
 
-    <section>
+    <section id="cuenta">
       <h2>2. Tu cuenta</h2>
       <ul>
-        <li>Debes ser mayor de 18 años y dar datos verdaderos.</li>
-        <li>Eres responsable de cuidar tu contraseña y de lo que se haga con tu cuenta.</li>
+        <li>Debes ser mayor de 18 años y dar datos verdaderos y actualizados.</li>
+        <li>Eres responsable de cuidar tu contraseña y de lo que se haga con tu cuenta. Avísanos de inmediato si crees que alguien más la usa.</li>
+        <li>Una persona, una cuenta. No puedes vender ni transferir tu cuenta.</li>
+        <li>Podemos suspender o cerrar una cuenta si detectamos fraude, uso indebido, datos falsos, maltrato al personal o a los repartidores, o incumplimiento de estos términos. Tus pedidos en curso se atenderán o reembolsarán según corresponda.</li>
         <li>Puedes eliminar tu cuenta cuando quieras desde <strong>Perfil</strong> (ver <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>).</li>
       </ul>
     </section>
 
-    <section>
-      <h2>3. Precios y total del pedido</h2>
+    <section id="servicio">
+      <h2>3. Qué ofrecemos</h2>
+      <ul>
+        <li><strong>Catálogo y pedidos:</strong> eliges productos, tu forma de pago y de entrega, y confirmas tu pedido.</li>
+        <li><strong>Directo a la Olla:</strong> servicio opcional en el que cortamos o preparamos ciertos productos según tu elección.</li>
+        <li><strong>Lista Fácil:</strong> nos mandas tu lista en texto, foto o dibujo; nuestro equipo arma el pedido y te confirma los productos y el total antes de entregarlo.</li>
+        <li><strong>Pide o sugiere:</strong> puedes pedirnos un producto que no ves en el catálogo o sugerirnos uno. Es una solicitud: no garantiza que lo incorporemos ni su precio o fecha.</li>
+        <li><strong>Patrocinadores y enlaces externos:</strong> la app puede mostrar anuncios o enlaces de negocios aliados. No somos responsables de sus productos, servicios ni de sus sitios; tu trato con ellos es directamente con ellos.</li>
+      </ul>
+    </section>
+
+    <section id="precios">
+      <h2>4. Precios y total del pedido</h2>
       <ul>
         <li>Los precios están en pesos mexicanos e incluyen impuestos, salvo que se indique otra cosa.</li>
         <li>El total que ves antes de confirmar incluye los productos, el servicio de “Directo a la Olla” si lo eliges, el costo de envío según la distancia a tu dirección y el costo de servicio.</li>
-        <li>Si pagas en efectivo, se aplica un <strong>descuento por pago en efectivo</strong> sobre el total. Verás el descuento desglosado en el resumen antes de confirmar.</li>
+        <li>Existe un <strong>pedido mínimo</strong> para poder confirmar; la app te muestra el monto vigente.</li>
+        <li>Si pagas en efectivo, puede aplicar un <strong>descuento por pago en efectivo</strong> sobre el total. Verás el descuento desglosado en el resumen antes de confirmar.</li>
         <li>Si un precio cambia entre que armas tu carrito y confirmas, la app te muestra el total actualizado antes de cobrar.</li>
+        <li><strong>Errores evidentes de precio.</strong> Si por un error técnico un producto aparece con un precio manifiestamente equivocado, te avisaremos antes de prepararlo para que puedas confirmar el precio correcto o cancelar sin costo.</li>
+        <li>Los productos que se venden por peso pueden tener un peso final ligeramente distinto al pedido; el cobro se ajusta a lo que realmente se entrega cuando aplique.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>4. Formas de pago</h2>
+    <section id="pagos">
+      <h2>5. Formas de pago</h2>
       <ul>
-        <li><strong>Tarjeta</strong>: el cobro lo procesa Stripe en el momento de confirmar. Mercadito Go no guarda los datos de tu tarjeta.</li>
-        <li><strong>Efectivo</strong>: pagas al recibir. Indica con cuánto pagarás para que el repartidor lleve cambio.</li>
+        <li><strong>Tarjeta:</strong> el cobro lo procesa un procesador de pagos externo en el momento de confirmar. Mercadito Go no guarda los datos de tu tarjeta. Tu banco puede pedirte una verificación adicional.</li>
+        <li><strong>Efectivo:</strong> pagas al recibir. Indica con cuánto pagarás para que el repartidor lleve cambio; el cambio está sujeto a disponibilidad.</li>
+        <li><strong>Transferencia bancaria:</strong> haces la transferencia a la cuenta que te muestra la app, con la referencia indicada. Preparamos tu pedido cuando nuestro equipo confirma que recibió el pago. Solo pedimos pagos por los medios que aparecen en la app: ante cualquier otro medio, desconfía y avísanos.</li>
+        <li>Si no podemos confirmar tu pago, el pedido puede cancelarse y, si ya nos pagaste, te lo reembolsamos.</li>
+        <li>Si desconoces un cargo, escríbenos primero para resolverlo rápidamente; así evitas retrasos en tu reembolso.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>5. Entregas</h2>
+    <section id="entregas">
+      <h2>6. Entregas y recolección</h2>
       <ul>
         <li>Nuestro horario de operación es de <strong>9:30 a 19:00 horas</strong>. Entregamos dentro de nuestra zona de servicio en Culiacán y solo dentro de ese horario.</li>
         <li>Los pedidos para entrega estándar se reciben de 9:30 a 17:00 horas y llegan en un plazo aproximado de 2 horas. Fuera de ese horario puedes programar tu entrega para otro momento dentro del horario de operación.</li>
-        <li>Al recibir, el repartidor te pedirá un código de confirmación que verás en la app.</li>
-        <li>Si eliges recoger en tienda, presenta el código de recogida que te muestra la app.</li>
+        <li>Los tiempos son estimados y pueden variar por demanda, clima, tráfico u otras causas.</li>
+        <li>Debes dar una dirección correcta y estar atento al teléfono. El repartidor puede ser parte de nuestro equipo o un repartidor externo; en ambos casos recibe únicamente los datos necesarios para entregar tu pedido.</li>
+        <li>Al recibir, el repartidor te pedirá un <strong>código de confirmación</strong> que verás en la app. No lo des a nadie más que al repartidor que tiene tu pedido en la mano.</li>
+        <li>Si no podemos entregar porque nadie responde o la dirección es incorrecta, intentaremos contactarte; si no se logra, el pedido puede cancelarse y se aplican las reglas de la <a href="devoluciones.html">política de devoluciones</a>.</li>
+        <li>Si eliges recoger en tienda, presenta el código de recogida que te muestra la app en el centro de producción indicado.</li>
+        <li>Para tu seguridad y la del repartidor, podemos negarnos a entregar en zonas o situaciones de riesgo.</li>
+      </ul>
+    </section>
+
+    <section id="productos">
+      <h2>7. Productos frescos, disponibilidad y alimentos</h2>
+      <ul>
+        <li>Son productos frescos de mercados locales: su tamaño, color y peso pueden variar ligeramente respecto a las fotos.</li>
+        <li>La disponibilidad cambia durante el día. Si un producto no está disponible, te contactaremos para sustituirlo o quitarlo del pedido; solo te cobramos lo que se entrega.</li>
+        <li>Revisa tu pedido al recibirlo y conserva en refrigeración lo que lo necesite en cuanto lo recibas.</li>
+        <li>La información sobre ingredientes o alérgenos que mostremos es orientativa. Si tienes alergias o restricciones, consulta con nosotros antes de pedir; no podemos garantizar la ausencia de trazas.</li>
       </ul>
     </section>
 
     <section id="devoluciones">
-      <h2>6. Productos frescos, faltantes, cambios y devoluciones</h2>
+      <h2>8. Devoluciones, cancelaciones y reembolsos</h2>
+      <p>Resumen (el detalle completo está en la <a href="devoluciones.html">Política de devoluciones, cancelaciones y reembolsos</a>):</p>
       <ul>
-        <li>Son productos frescos de mercados locales: su tamaño, color y peso pueden variar ligeramente respecto a las fotos.</li>
-        <li>Si algún producto no está disponible, te contactaremos para sustituirlo o quitarlo del pedido; si ya pagaste con tarjeta, te reembolsaremos la diferencia.</li>
-        <li>Si recibes un producto dañado o incorrecto, avísanos lo antes posible, de preferencia <strong>dentro de las 2 horas siguientes a la entrega</strong>, con detalles y, si puedes, fotos. Revisaremos cada caso y, si procede, repondremos el producto (según disponibilidad) o te reembolsaremos parcial o totalmente su importe.</li>
-        <li>No se aceptan devoluciones por motivos distintos a productos dañados o incorrectos.</li>
+        <li>Si recibes un producto dañado, en mal estado o incorrecto, avísanos lo antes posible, de preferencia <strong>dentro de las 2 horas siguientes a la entrega</strong>, con detalles y, si puedes, fotos. Revisaremos cada caso y, si procede, repondremos el producto o te reembolsaremos su importe.</li>
+        <li>Por tratarse de alimentos perecederos, no se aceptan devoluciones por motivos distintos a producto dañado, en mal estado o incorrecto.</li>
+        <li>Puedes pedir la cancelación mientras el pedido no haya empezado a prepararse o a salir a entrega, escribiéndonos.</li>
+        <li>Los reembolsos se hacen por el mismo medio de pago, cuando es posible.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>7. Cancelaciones y reembolsos</h2>
+    <section id="propiedad">
+      <h2>9. Propiedad intelectual</h2>
+      <p>La marca, el logotipo, el diseño y los contenidos de Mercadito Go son de Mercadito Go o de sus licenciantes. Te damos una licencia limitada, personal y revocable para usar la app. No puedes copiar, modificar, descompilar ni explotar comercialmente la app o sus contenidos sin autorización por escrito. Las fotos y textos que nos mandes (por ejemplo en Lista Fácil) siguen siendo tuyos; nos autorizas a usarlos solo para atender tu pedido.</p>
+    </section>
+
+    <section id="uso">
+      <h2>10. Uso adecuado</h2>
       <ul>
-        <li>Puedes pedir la cancelación mientras el pedido no haya salido a entrega, escribiéndonos.</li>
-        <li>Los reembolsos de pagos con tarjeta se hacen a la misma tarjeta a través de Stripe; el tiempo en que se reflejan depende de tu banco.</li>
+        <li>No uses la app para fines ilícitos ni intentes acceder a datos de otras personas o a sistemas que no te corresponden.</li>
+        <li>No hagas pedidos falsos, no abuses de promociones ni intentes defraudar los medios de pago.</li>
+        <li>No interfieras con el funcionamiento de la app (por ejemplo, con ataques, robots o ingeniería inversa).</li>
+        <li>Trata con respeto a nuestro equipo y a los repartidores.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>8. Lista Fácil</h2>
-      <p>Puedes mandarnos tu lista en texto, foto o dibujo. Nuestro equipo arma el pedido con base en ella y te confirma los productos y el total antes de entregarlo.</p>
-    </section>
-
-    <section>
-      <h2>9. Uso adecuado y responsabilidad</h2>
+    <section id="responsabilidad">
+      <h2>11. Disponibilidad y responsabilidad</h2>
       <ul>
-        <li>No uses la app para fines ilícitos ni intentes acceder a datos de otras personas.</li>
-        <li>Hacemos lo posible por que la app funcione sin interrupciones, pero puede haber fallas o mantenimientos. No somos responsables por retrasos causados por fuerza mayor o datos de entrega incorrectos.</li>
+        <li>Hacemos lo posible por que la app funcione sin interrupciones, pero puede haber fallas, mantenimientos o interrupciones de terceros (internet, proveedores de pago, mapas).</li>
+        <li>No somos responsables por retrasos o incumplimientos causados por fuerza mayor o caso fortuito, ni por datos de entrega incorrectos que tú nos des.</li>
+        <li>Nuestra responsabilidad se limita, hasta donde la ley lo permita, al importe del pedido afectado. Esto no limita tus derechos como consumidor que la ley no permite renunciar.</li>
       </ul>
     </section>
 
-    <section>
-      <h2>10. Cambios, contacto y ley aplicable</h2>
+    <section id="comunicaciones">
+      <h2>12. Comunicaciones y notificaciones</h2>
+      <p>Te enviaremos avisos sobre tu cuenta y tus pedidos por la app (notificaciones), correo y, cuando sea necesario para resolver tu pedido, WhatsApp o llamada. Son parte del servicio. Las promociones solo se envían si nos das tu consentimiento y puedes retirarlo cuando quieras.</p>
+    </section>
+
+    <section id="cambios">
+      <h2>13. Cambios a estos términos</h2>
+      <p>Podemos actualizar estos términos; la versión vigente es la publicada en esta página, con su fecha. Si el cambio es importante te avisaremos en la app. Si sigues usando el servicio después del cambio, lo aceptas; si no estás de acuerdo, puedes dejar de usarlo y eliminar tu cuenta.</p>
+    </section>
+
+    <section id="contacto">
+      <h2>14. Contacto, quejas y ley aplicable</h2>
       <ul>
-        <li>Podemos actualizar estos términos; la versión vigente es la publicada en esta página.</li>
-        <li>Contacto: <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a> o WhatsApp <a href="https://wa.me/526674321478">667 432 1478</a>.</li>
-        <li>Se rigen por las leyes de México. Para cualquier controversia te puedes dirigir a la Procuraduría Federal del Consumidor (PROFECO) o a los tribunales de Culiacán, Sinaloa.</li>
+        <li>Atención a clientes: <a href="mailto:contacto@mercadito-go.com">contacto@mercadito-go.com</a> o WhatsApp <a href="https://wa.me/526674321478">667 432 1478</a>.</li>
+        <li>Estos términos se rigen por las leyes de México, en particular la Ley Federal de Protección al Consumidor.</li>
+        <li>Si tienes una queja y no la resolvemos, puedes acudir a la Procuraduría Federal del Consumidor (PROFECO). Para cualquier controversia, las partes se someten a los tribunales competentes de Culiacán, Sinaloa, sin perjuicio de tu derecho a acudir a PROFECO o a los tribunales de tu domicilio, cuando la ley lo permita.</li>
+        <li>Si alguna parte de estos términos resultara inválida, el resto seguirá vigente.</li>
       </ul>
     </section>
 
-    <p class="muted"><a href="aviso-privacidad.html">Aviso de privacidad</a> · <a href="./">Volver a Mercadito Go</a></p>
+    <p class="muted"><a href="aviso-privacidad.html">Aviso de privacidad</a> · <a href="devoluciones.html">Devoluciones y reembolsos</a> · <a href="./">Volver a Mercadito Go</a></p>
   </main>
 </body>
 </html>

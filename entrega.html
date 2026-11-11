@@ -152,7 +152,12 @@
 
     // Productos
     var lista = el('ul');
-    (p.productos || []).forEach(function (it) { lista.appendChild(el('li', { text: it.cantidad + ' × ' + it.nombre })); });
+    (p.productos || []).forEach(function (it) {
+      var li = el('li', { text: it.cantidad + ' × ' + it.nombre });
+      // Total aproximado ("4 × 250 g ≈ 1 kg") para revisar que no falte nada.
+      if (it.peso) li.appendChild(el('div', { class: 'muted', text: it.peso }));
+      lista.appendChild(li);
+    });
     wrap.appendChild(el('div', { class: 'card' }, [el('h2', { text: 'Lleva' }), lista]));
 
     // Acciones
